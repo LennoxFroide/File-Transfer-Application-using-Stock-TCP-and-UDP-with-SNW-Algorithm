@@ -435,8 +435,6 @@ def snw_get_command(clientDirectory, cacheIp, cachePortNumber, serverIp, serverP
     else:
         sourceMessage = 'Error: File is neither in cache nor server!'
     # We will receive the data through this socket # We need to use the extra cache port
-    # clientSocketSNW.bind(('', clientGetSnwPort))
-    # clientSocketSNW.connect((cacheName, cachePort + 100))
     initializationMessage = 'Ready!'
     clientSocketSNW.send(initializationMessage.encode())
 

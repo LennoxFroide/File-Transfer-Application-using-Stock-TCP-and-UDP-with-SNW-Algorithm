@@ -70,18 +70,6 @@ if __name__ == "__main__":
         x.join()
         y.join()
         # pass
-    """
-    process1 = threading.Thread(target = build_server_put_ports(myServer.portNumber, myServer.portNumber + 1000, myServer.path, myServer.transportProtocol,1))
-    process2 = threading.Thread(target = build_server_get_ports(myServer.portNumber, myServer.path,1))
-    process1.start()
-    process2.start()
-    """
-    """
-    # By default we create a tcp socket to receive the command from client or cache
-    tcpModule.tcp_create_server(myServer.portNumber, myServer.path)
-    # We need a different port to accept the actual upload message
-    tcpModule.tcp_receive_upload_to_server(myServer.portNumber + 1000, myServer.path)
-    """
 
     
     

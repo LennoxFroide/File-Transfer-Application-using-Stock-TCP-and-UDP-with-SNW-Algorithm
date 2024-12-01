@@ -96,14 +96,6 @@ if __name__ == "__main__":
             # Now we can send the file but we first need to check the transport protocol
             if myClient.transportProtocol == 'tcp':
                 # Building the get ports for server
-                # serverModule.build_server_put_ports()
-                # Getting the full path to the file
-                # path_name = os.path.join(myClient.path,filename)
-                # Opening the file to read it
-                # readFile = open(path_name, 'r')
-                # Reading the file
-                # fileToUpload = readFile.read()
-                # print(fileToUpload)
                 # Uploading the file using TCP
                 print(filename)
                 tcpModule.tcp_upload(myClient.serverIp, myClient.serverPort + 1000, fileToUpload, clientSocket, None)

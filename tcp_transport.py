@@ -98,10 +98,6 @@ def tcp_create_two_caches_get_command(cachePortNumber, cachePortTwo, cacheDirect
         command, filename = tcp_extract_command_and_file(message)
         # Evaluating the command
         if command == 'get':
-            # toClient = 'File downloaded from cache!'
-            # clientSocket.send(toClient.encode())
-            # clientSocket.close()
-            # continue
             # Getting the path to create file in
             file_path = os.path.join(cacheDirectory, filename)
             # Checking if file exists in the cache folder
@@ -129,12 +125,7 @@ def tcp_create_two_caches_get_command(cachePortNumber, cachePortTwo, cacheDirect
                 f = open(file_path, "w")
                 while True:
                     serverResponse = cacheSocketSendCommandToServer.recv(102400).decode()
-                    print('Getting response from server!')
-                    # We will create this file in the cache and write to it
-                    # Getting the path to create file in
-                    # file_path = os.path.join(cacheDirectory, filename)
-                    # Creating file with name filename
-                    # f = open(file_path, "w")
+                    # print('Getting response from server!')
                     # Writing the data from the cache to this file
                     f.write(serverResponse)
                     # We're done getting the data
@@ -149,20 +140,6 @@ def tcp_create_two_caches_get_command(cachePortNumber, cachePortTwo, cacheDirect
                     clientSocket.close()
                     break
 
-
-                """
-                if serverResponse == 'File downloaded from server!':
-                    # We need to send this to the client
-                    clientSocket.send(serverResponse.encode())
-                    serverSocketReceiveGetResponse.close()
-                    clientSocket.close()
-                    continue
-                    # break
-                else:
-                    raise Exception('Error occured while downloading file from server!')
-
-                pass
-                """
 
 def tcp_create_two_servers_get_command_send_file(serverPortNumber, serverDirectory):
     # Getting the port number
@@ -196,10 +173,6 @@ def tcp_create_two_servers_get_command_send_file(serverPortNumber, serverDirecto
             cacheSendingGetRequest.send(fileData.encode())
             cacheSendingGetRequest.close()
             continue
-            # response = 'File downloaded from server!'
-            # cacheSendingGetRequest.send(response.encode())
-            # cacheSendingGetRequest.close()
-            # continue
         else:
             pass
 #-------------------------------Creating 2 ports 1 for put command and 1 for put file----------------------------------------#
@@ -255,20 +228,7 @@ def tcp_create_two_servers(serverPortNumber1, serverPortNumber2, serverDirectory
             fileData = clientSocket.recv(102400).decode()
             print(len(fileData.encode('utf-8')))
             # We can write this data
-            # Getting the path to create file in
-            # file = open(file_path, 'w')
-            # Getting the path to create file in
-            # file_path = os.path.join(serverDirectory, filename)
-            # fileToWrite = open(file_path, 'w')
             fileToWrite.write(fileData)
-            # response = 'File uploaded to server!'
-            # clientSocket.send(response.encode())
-            # fileToWrite.close()
-            # clientSocket.close()
-            # Breaking from the data scoket
-            # or len(fileData.encode('utf-8')) < 1024
-            # if not fileData:
-                # print('No data')
             fileToWrite.close()
             response = 'File uploaded to server!'
             clientSocket.send(response.encode())    
@@ -325,12 +285,6 @@ def tcp_upload(serverIp, serverPortNumber, fileToUpload, clientSocket, filename 
     message1 = fileToUpload
     print('Tcp upload!')
     clientSocket.send(message1.encode())
-    # clientSocket.close()
-    # We also need to tell the server where to write it
-    # message2 = filename
-    # clientSocket = socket(AF_INET, SOCK_STREAM)
-    #clientSocket.connect((serverName, serverPort))
-    # clientSocket.send(message2.encode())
     serverResponse = clientSocket.recv(1024).decode()
     if serverResponse == 'File uploaded successfully':
         print('File uploaded to server!')
@@ -348,11 +302,6 @@ def tcp_receive_upload_to_server(serverPortNumber, serverDirectory):
     # Binding socket to port
     serverSocket.bind(('', serverPort))
     serverSocket.listen(1)
-    # Indicating that the server is ready
-    # print("Server is ready for the client!")
-    #file_path = os.path.join(serverDirectory, filename)
-    #file = open(file_path, 'w')
-    # file.write(message)
     # To keep listening infinitely
     # messageCounter = 0
     while True:
